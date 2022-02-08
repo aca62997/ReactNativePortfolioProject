@@ -1,27 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
+import { BAKERIES } from '../shared/bakeries';
 
-function Directory(props) {
+class Directory extends Component {
 
-    const renderDirectoryItem = ({item}) => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bakeries: BAKERIES
+        };
+    }
+
+    static navigationOptions = {
+        title: 'Menu'
+    }
+
+    render() {
+        const { navigate } = this.props.navigation;
+        const renderDirectoryItem = ({item}) => {
+            return (
+                <ListItem
+                    title={item.name}
+                    subtitle={item.description}
+                    onPress={() => navigate('BakeryInfo', { bakeryId: item.id })}
+                    leftAvatar={{ source: require('./images/sprinkles.jpg')}}
+                />
+            );
+        };
+
         return (
-            <ListItem
-                title={item.name}
-                subtitle={item.description}
-                onPress={() => props.onPress(item.id)}
-                leftAvatar={{ source: require('./images/brownies.jpeg')}}
+            <FlatList
+                data={this.state.bakeries}
+                renderItem={renderDirectoryItem}
+                keyExtractor={item => item.id.toString()}
             />
         );
-    };
-
-    return (
-        <FlatList
-            data={props.bakeries}
-            renderItem={renderDirectoryItem}
-            keyExtractor={item => item.id.toString()}
-        />
-    );
+    }
 }
 
 export default Directory;

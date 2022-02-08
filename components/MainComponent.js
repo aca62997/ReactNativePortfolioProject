@@ -1,33 +1,41 @@
 import React, { Component } from 'react';
 import Directory from './DirectoryComponent';
 import BakeryInfo from './BakeryInfoComponent';
-import { View } from 'react-native';
-import { BAKERIES } from '../shared/bakeries';
+import Constants from 'expo-constants';
+import { View, Platform } from 'react-native';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+
+const DirectoryNavigator = createStackNavigator(
+    {
+        Directory: { screen: Directory },
+        BakeryInfo: { screen: BakeryInfo }
+    }, 
+    {
+        initialRouteName: 'Directory',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: 'pink'
+            },
+            headerTintColor: '#CE4165',
+            headerTitleStyle: {
+                color: 'CE4165'
+            }
+        }
+    }
+);
+
+const AppNavigator = createAppContainer(DirectoryNavigator);
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bakeries: BAKERIES,
-            selectedBakery: null
-        };
-    }
-
-    onBakerySelect(bakeryId) {
-        this.setState({selectedBakery: bakeryId});
-    }
-
     render() {
         return (
-            <View style={{ flex: 1 }}>
-                <Directory
-                    bakeries={this.state.bakeries}
-                    onPress={bakeryId => this.onBakerySelect(bakeryId)}
-                />
-                <BakeryInfo
-                    bakery={this.state.bakeries.filter(
-                        bakery => bakery.id === this.state.selectedBakery)[0]}
-                />
+            <View
+                style={{
+                    flex: 1,
+                    paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+            }}>
+                <AppNavigator />
             </View>
         );
     }
