@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { BAKERIES } from '../shared/bakeries';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 
 function RenderItem({item}) {
     if (item) {
