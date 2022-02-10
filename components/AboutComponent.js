@@ -6,8 +6,8 @@ import { BAKERIES } from "../shared/bakeries";
 function Mission() {
   return (
       <Card
-          title={"Our Story"}
-          image={require('./images/chocolateChipCookie.jpeg')}
+            title={"Our Story"}
+            image={require('./images/chocolateChipCookie.jpeg')}
             style={{ padding: 10 }}>
         <Text style={{ margin: 10 }}>
             Amanda started baking when she was a child with her mom. She loved baking so much that she made it her passion and loves baking every day!
