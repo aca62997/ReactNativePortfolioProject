@@ -3,6 +3,8 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { bakeries } from './bakeries';
 import { comments } from './comments';
+import { promotions } from './promotions';
+import { partners } from './partners';
 import { favorites } from './favorites';
 
 export const ConfigureStore = () => {
@@ -10,6 +12,8 @@ export const ConfigureStore = () => {
         combineReducers({
             bakeries,
             comments,
+            partners,
+            promotions,
             favorites
         }),
         applyMiddleware(thunk, logger)

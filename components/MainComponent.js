@@ -39,7 +39,6 @@ const DirectoryNavigator = createStackNavigator(
         }
     }
 );
-
 const HomeNavigator = createStackNavigator(
     {
         Home: { screen: Home }
@@ -120,9 +119,7 @@ const MainNavigator = createDrawerNavigator(
         drawerBackgroundColor: 'pink'
     }
 );
-
 const AppNavigator = createAppContainer(MainNavigator)
-
 class Main extends Component {
     render() {
         return (
