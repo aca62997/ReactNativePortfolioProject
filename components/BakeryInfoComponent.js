@@ -1,23 +1,17 @@
 import React, { Component } from "react";
 import { Text, View, ScrollView, FlatList } from "react-native";
 import { Card, Icon } from "react-native-elements";
-import { connect } from "react-redux";
-import { baseUrl } from "../shared/baseUrl";
-
-const mapStateToProps = (state) => {
-  return {
-    bakeries: state.bakeries,
-    comments: state.comments,
-  };
-};
+import { BAKERIES } from "../shared/bakeries";
+import { COMMENTS } from "../shared/comments";
 
 function RenderBakery(props) {
   const { bakery } = props;
+
   if (bakery) {
     return (
       <Card
         featuredTitle={bakery.name}
-        image={{ uri: baseUrl + bakery.image }}
+        image={require("./images/sprinkles.jpg")}
       >
         <Text style={{ margin: 10 }}>{bakery.description}</Text>
         <Icon
@@ -37,6 +31,7 @@ function RenderBakery(props) {
   }
   return <View />;
 }
+
 function RenderComments({ comments }) {
   const renderCommentItem = ({ item }) => {
     return (
@@ -49,8 +44,9 @@ function RenderComments({ comments }) {
       </View>
     );
   };
+
   return (
-    <Card title="Comments">
+    <Card title="Reviews">
       <FlatList
         data={comments}
         renderItem={renderCommentItem}
@@ -59,28 +55,28 @@ function RenderComments({ comments }) {
     </Card>
   );
 }
+
 class BakeryInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      bakeries: BAKERIES,
+      comments: COMMENTS,
       favorite: false,
     };
   }
+
   markFavorite() {
     this.setState({ favorite: true });
   }
+
   static navigationOptions = {
     title: "Bakery Information",
   };
-
   render() {
     const bakeryId = this.props.navigation.getParam("bakeryId");
-    const bakery = this.props.bakeries.bakeries.filter(
-      (bakery) => bakery.id === bakeryId
-    )[0];
-    const comments = this.props.comments.comments.filter(
-      (comment) => comment.bakeryId === bakeryId
-    );
+    const bakery = this.state.bakeries.filter((bakery) => bakery.id === bakeryId)[0];
+    const comments = this.state.comments.filter((comment) => comment.bakeryId === bakeryId);
     return (
       <ScrollView>
         <RenderBakery
@@ -94,4 +90,4 @@ class BakeryInfo extends Component {
   }
 }
 
-export default connect(mapStateToProps)(BakeryInfo);
+export default BakeryInfo;
