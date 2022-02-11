@@ -1,43 +1,56 @@
-import React, { Component } from "react";
-import { Text, View, ScrollView, FlatList } from "react-native";
-import { Card, ListItem } from "react-native-elements";
-import { BAKERIES } from "../shared/bakeries";
-import { connect } from 'react-redux';
-import { baseUrl } from '../shared/baseUrl';
-import Loading from './LoadingComponent';
+import React, { Component } from 'react';
+import { View, Text, ScrollView } from 'react-native';
+import { Card } from 'react-native-elements';
+import { BAKERIES } from '../shared/bakeries';
+import { PROMOTIONS } from '../shared/promotions';
+import { PARTNERS } from '../shared/partners';
 
-function Mission() {
-  return (
-      <Card
-            title={"Our Story"}
-            image={require('./images/chocolateChipCookie.jpeg')}
-            style={{ padding: 10 }}>
-        <Text style={{ margin: 10 }}>
-            Amanda started baking when she was a child with her mom. She loved baking so much that she made it her passion and loves baking every day!
-        </Text>
-    </Card>
-  );
+function RenderItem({item}) {
+    if (item) {
+        return (
+            <Card
+                featuredTitle={item.name}
+                image={require('./images/sprinkles.jpg')}
+            >
+                <Text style={{margin: 10}}>
+                    {item.description}
+                </Text>
+            </Card>
+        );
+    }
+    return <View />;
 }
 
-class About extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bakeries: BAKERIES,
-    };
-  }
+class Home extends Component {
 
-  static navigationOptions = {
-    title: "About Us",
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            bakeries: BAKERIES,
+            promotions: PROMOTIONS,
+            partners: PARTNERS
+        };
+    }
 
-  render() {
+    static navigationOptions = {
+        title: 'Home'
+    }
+
+    render() {
         return (
             <ScrollView>
-                <Mission />
+                <RenderItem 
+                    item={this.state.bakeries.filter(bakery => bakery.featured)[0]}
+                />
+                <RenderItem 
+                    item={this.state.promotions.filter(promotion => promotion.featured)[0]}
+                />
+                <RenderItem 
+                    item={this.state.partners.filter(partner => partner.featured)[0]}
+                />
             </ScrollView>
-      );
-  }
+        );
+    }
 }
 
-export default About;
+export default Home;

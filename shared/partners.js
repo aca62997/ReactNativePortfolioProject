@@ -1,9 +1,9 @@
 export const PARTNERS = [
     {
         id: 0,
-        name: "Amanda's Pastry Shop",
-        image: "/assets/images/bakery.png",
+        name: "Meet Amanda!",
+        image: "/assets/images/stalkersPrey2.jpg",
         featured: false,
-        description: "Sweet treats for any occasion!"
+        description: "Here she is in all her... glory..."
     },
 ]
