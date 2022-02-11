@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Text, View, ScrollView, FlatList } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 import { BAKERIES } from "../shared/bakeries";
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+import Loading from './LoadingComponent';
 
 function Mission() {
   return (
@@ -15,21 +18,17 @@ function Mission() {
     </Card>
   );
 }
-
 class About extends Component {
-  
-    constructor(props) {
+  constructor(props) {
     super(props);
     this.state = {
       bakeries: BAKERIES,
     };
   }
-  
-    static navigationOptions = {
+  static navigationOptions = {
     title: "About Us",
   };
-  
-    render() {
+  render() {
         return (
             <ScrollView>
                 <Mission />

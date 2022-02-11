@@ -2,7 +2,7 @@ import * as ActionTypes from './ActionTypes';
 
 export const bakeries = (state = { isLoading: true,
                                      errMess: null,
-                                     campsites: []}, action) => {
+                                     bakeries: []}, action) => {
     switch (action.type) {
         case ActionTypes.ADD_BAKERIES:
             return {...state, isLoading: false, errMess: null, bakeries: action.payload};
