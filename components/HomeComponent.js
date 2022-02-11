@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
-import { BAKERIES } from '../shared/bakeries';
-import { connect } from 'react-redux';
-import { baseUrl } from '../shared/baseUrl';
-import Loading from './LoadingComponent';
+import { CAMPSITES } from '../shared/campsites';
+import { PROMOTIONS } from '../shared/promotions';
+import { PARTNERS } from '../shared/partners';
 
 function RenderItem({item}) {
     if (item) {
@@ -28,6 +27,8 @@ class Home extends Component {
         super(props);
         this.state = {
             bakeries: BAKERIES,
+            promotions: PROMOTIONS,
+            partners: PARTNERS
         };
     }
 
@@ -40,6 +41,12 @@ class Home extends Component {
             <ScrollView>
                 <RenderItem 
                     item={this.state.bakeries.filter(bakery => bakery.featured)[0]}
+                />
+                <RenderItem 
+                    item={this.state.promotions.filter(promotion => promotion.featured)[0]}
+                />
+                <RenderItem 
+                    item={this.state.partners.filter(partner => partner.featured)[0]}
                 />
             </ScrollView>
         );

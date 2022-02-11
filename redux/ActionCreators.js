@@ -68,3 +68,14 @@ export const addBakeries = bakeries => ({
     type: ActionTypes.ADD_BAKERIES,
     payload: bakeries
 });
+
+export const postFavorite = bakeryId => dispatch => {
+    setTimeout(() => {
+        dispatch(addFavorite(bakeryId));
+    }, 2000);
+};
+
+export const addFavorite = bakeryId => ({
+    type: ActionTypes.ADD_FAVORITE,
+    payload: bakeryId
+});
