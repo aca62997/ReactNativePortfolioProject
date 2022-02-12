@@ -5,11 +5,12 @@ import BakeryInfo from './BakeryInfoComponent';
 import About from "./AboutComponent";
 import Contact from "./ContactComponent";
 import Constants from 'expo-constants';
-import { View, Platform, StyleSheet } from 'react-native';
+import { View, Platform, StyleSheet, Text, ScrollView, Image, } from "react-native";
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import { createAppContainer } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+import SafeAreaView from "react-native-safe-area-view";
 
 const DirectoryNavigator = createStackNavigator(
     {
@@ -108,6 +109,28 @@ const ContactNavigator = createStackNavigator(
     }
 );
 
+const CustomDrawerContentComponent = (props) => (
+  <ScrollView>
+    <SafeAreaView
+      style={styles.container}
+      forceInset={{ top: "always", horizontal: "never" }}
+    >
+      <View style={styles.drawerHeader}>
+        <View style={{ flex: 1 }}>
+          <Image
+            source={require("./images/sprinkles.jpg")}
+            style={styles.drawerImage}
+          />
+        </View>
+        <View style={{ flex: 2 }}>
+          <Text style={styles.drawerHeaderText}>Amanda's Pastry Shop</Text>
+        </View>
+      </View>
+      <DrawerItems {...props} />
+    </SafeAreaView>
+  </ScrollView>
+);
+
 const MainNavigator = createDrawerNavigator(
     {
         Home: { screen: HomeNavigator },
@@ -116,7 +139,8 @@ const MainNavigator = createDrawerNavigator(
         Contact: { screen: ContactNavigator },
     },
     {
-        drawerBackgroundColor: 'pink'
+      drawerBackgroundColor: 'pink',
+      contentComponent: CustomDrawerContentComponent,
     }
 );
 const AppNavigator = createAppContainer(MainNavigator)
@@ -134,11 +158,32 @@ class Main extends Component {
 }
 
 const styles = StyleSheet.create({
-    stackIcon: {
-        marginLeft: 10,
-        color: '#fff',
-        fontSize: 24
-    }
+  container: {
+    flex: 1,
+  },
+  drawerHeader: {
+    backgroundColor: "pink",
+    height: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    flexDirection: "row",
+  },
+  drawerHeaderText: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  drawerImage: {
+    margin: 10,
+    height: 60,
+    width: 60,
+  },
+  stackIcon: {
+    marginLeft: 10,
+    color: "#fff",
+    fontSize: 24,
+  },
 });
 
 export default Main;
