@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { Text, View, ScrollView, FlatList } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 import { BAKERIES } from "../shared/bakeries";
-import { connect } from 'react-redux';
-import { baseUrl } from '../shared/baseUrl';
-import Loading from './LoadingComponent';
-
 function Mission() {
   return (
       <Card
